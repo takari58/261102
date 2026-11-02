@@ -747,13 +747,23 @@ function toggleCompass(){
 
 //コンパス処理
 function startCompass(){
-    window.addEventListener(
-        //"deviceorientation",
-        "deviceorientationabsolute",
-        handleOrientation,
-        true
-    );
 
+    if(
+        "ondeviceorientationabsolute"
+        in window
+    ){
+        window.addEventListener(
+            "deviceorientationabsolute",
+            handleOrientation,
+            true
+        );
+    }else{
+        window.addEventListener(
+            "deviceorientation",
+            handleOrientation,
+            true
+        );
+    }
 }
 
 //地図回転
@@ -767,7 +777,7 @@ function handleOrientation(event){
         else if(event.alpha !== null){
                 //android
                 heading =
-                    360 - event.alpha;
+                    event.alpha;
         }
         if(heading === null){
                 return;
@@ -782,9 +792,9 @@ function handleOrientation(event){
         absolute=${event.absolute}
         `;
         heading = (360 * event.alpha) % 360;
-        /*map.setBearing(
-                heading
-        );*/
+        map.setBearing(
+                -heading
+        );
         
         const arrow =
                 document.getElementById("arrow");
