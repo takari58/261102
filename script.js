@@ -814,17 +814,17 @@ function handleOrientation(event){
     smoothHeading =
         smoothHeading * 0.95 +
         heading * 0.05;
-    map.setBearing(
+    /*map.setBearing(
             0
         //180 - smoothHeading
-    );
+    );*/
     const arrow =
         document.getElementById(
             "arrow"
         );
     if(arrow){
         arrow.style.transform =
-                `rotate(${heading}deg)`;    
+             `rotate(${-heading}deg)`;    
         //"rotate(0deg)";
     }
 }
