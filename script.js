@@ -757,33 +757,42 @@ function startCompass(){
 
 //地図回転
 function handleOrientation(event){
-    let heading = null;
-    if(event.webkitCompassHeading!== undefined){
-        //iphone
-        heading =
-            event.webkitCompassHeading;
-    }
-    else if(event.alpha !== null){
-        //android
-        heading =
-            360 - event.alpha;
-    }
-    if(heading === null){
-        return;
-    }
-    console.log(
-            "heading=",heading
-    );
-    map.setBearing(
-            (heading + 180) % 360
-    );
+        let heading = null;
+        if(event.webkitCompassHeading!== undefined){
+                //iphone
+                heading =
+                event.webkitCompassHeading;
+        }
+        else if(event.alpha !== null){
+                //android
+                heading =
+                    360 - event.alpha;
+        }
+        if(heading === null){
+                return;
+        }        
         
-    const arrow =
-            document.getElementById("arrow");
-    if(arrow){
-            arrow.style.transform=
-                    "rotate(0deg)";
-    }
+        document.getElementById("info").innerHTML =
+        `
+        heading : ${heading.toFixed(1)}
+        <br>
+        alpha : ${event.alpha?.toFixed(1)}
+        <br>
+        beta : ${event.beta?.toFixed(1)}
+        <br>
+        gamma : ${event.gamma?.toFixed(1)}
+        `;
+        
+        map.setBearing(
+                (heading + 180) % 360
+        );
+        
+        const arrow =
+                document.getElementById("arrow");
+        if(arrow){
+                arrow.style.transform=
+                        "rotate(0deg)";
+        }
 }
 
 
