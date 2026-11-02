@@ -367,6 +367,12 @@ function startNavigation(goal) {
                 accuracy
             );
             if(inCompassMode){
+                    map.seetView([mylat,mylng],map.getZoom(),
+                    {
+                            animate:false
+                    });
+            }
+            if(inCompassMode){
                     map.panTo([myLat,myLng],{animate:false});
             }
             if (selectedGoal) {
@@ -754,7 +760,7 @@ function handleOrientation(event){
         return;
     }
     map.setBearing(
-        -heading
+        360-heading
     );
     const arrow =
             document.getElementById("arrow");
