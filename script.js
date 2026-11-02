@@ -815,7 +815,8 @@ function handleOrientation(event){
         smoothHeading * 0.95 +
         heading * 0.05;
     map.setBearing(
-        180 - smoothHeading
+            0
+        //180 - smoothHeading
     );
     const arrow =
         document.getElementById(
@@ -823,7 +824,8 @@ function handleOrientation(event){
         );
     if(arrow){
         arrow.style.transform =
-            "rotate(0deg)";
+                `rotate(${heading}deg)`;    
+        //"rotate(0deg)";
     }
 }
 
