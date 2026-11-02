@@ -375,7 +375,7 @@ function startNavigation(goal) {
                             map.project([myLat,myLng]);
                     //現在地アイコンのy軸上の位置
                     point.y += window.innerHeight*0.2;
-                    const offsetproject(point);
+                    const offsetLatLng ＝map.unproject(point);
                     map.panTo(
                             offsetLanLng,{
                                     animate:false
