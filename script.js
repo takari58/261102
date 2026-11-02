@@ -765,22 +765,27 @@ function handleOrientation(event){
         event.webkitCompassHeading
         !== undefined
     ){
+        //iphone
         heading =
             event.webkitCompassHeading;
     }
     else if(
         event.alpha !== null
     ){
+        //android
         heading =
-            event.alpha;
+            360 - event.alpha;
     }
     if(heading === null){
         return;
     }
     map.setBearing(
-        heading + 180
+        360 - heading
     );
     const arrow =
             document.getElementById("arrow");
-    if(arrow){arrow.style.transform="rotate(0deg)";}
+    if(arrow){
+            arrow.style.transform=
+                    "rotate(0deg)";
+    }
 }
