@@ -748,7 +748,8 @@ function toggleCompass(){
 //コンパス処理
 function startCompass(){
     window.addEventListener(
-        "deviceorientation",
+        //"deviceorientation",
+        "deviceorientationabsolute",
         handleOrientation,
         true
     );
@@ -774,18 +775,16 @@ function handleOrientation(event){
         
         document.getElementById("info").innerHTML =
         `
-        heading : ${heading.toFixed(1)}
+        heading=${heading.toFixed(1)}
         <br>
-        α : ${event.alpha?.toFixed(1)}
+        α=${event.alpha?.toFixed(1)}
         <br>
-        β : ${event.beta?.toFixed(1)}
-        <br>
-        γ : ${event.gamma?.toFixed(1)}
+        absolute=${event.absolute}
         `;
         heading = (360 * event.alpha) % 360;
-        map.setBearing(
+        /*map.setBearing(
                 heading
-        );
+        );*/
         
         const arrow =
                 document.getElementById("arrow");
