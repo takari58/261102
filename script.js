@@ -776,11 +776,11 @@ function handleOrientation(event){
         `
         heading : ${heading.toFixed(1)}
         <br>
-        alpha : ${event.alpha?.toFixed(1)}
+        α : ${event.alpha?.toFixed(1)}
         <br>
-        beta : ${event.beta?.toFixed(1)}
+        β : ${event.beta?.toFixed(1)}
         <br>
-        gamma : ${event.gamma?.toFixed(1)}
+        γ : ${event.gamma?.toFixed(1)}
         `;
         
         map.setBearing(
