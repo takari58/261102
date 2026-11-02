@@ -766,7 +766,7 @@ function handleOrientation(event){
         else if(event.alpha !== null){
                 //android
                 heading =
-                    event.alpha;
+                    360 - event.alpha;
         }
         if(heading === null){
                 return;
@@ -784,7 +784,7 @@ function handleOrientation(event){
         `;
         //heading = (heading + 180) % 360;
         map.setBearing(
-                -heading
+                heading
         );
         
         const arrow =
