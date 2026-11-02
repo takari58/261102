@@ -778,7 +778,7 @@ function handleOrientation(event){
         return;
     }
     map.setBearing(
-        heading
+        heading + 180
     );
     const arrow =
             document.getElementById("arrow");
