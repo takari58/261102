@@ -771,6 +771,9 @@ function handleOrientation(event){
     if(heading === null){
         return;
     }
+    console.log(
+            "heading=",heading
+    );
     map.setBearing((heading+180)%360);
         
     const arrow =
@@ -780,5 +783,5 @@ function handleOrientation(event){
                     "rotate(0deg)";
     }
 }
-console.log("heading=", heading);
+
 
