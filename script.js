@@ -390,9 +390,6 @@ function startNavigation(goal) {
                             }
                     );
             }
-            if(inCompassMode){
-                    map.panTo([myLat,myLng]);
-            }
             if (selectedGoal) {
                 showRoute(
                     myLat,
@@ -761,17 +758,12 @@ function startCompass(){
 //地図回転
 function handleOrientation(event){
     let heading = null;
-    if(
-        event.webkitCompassHeading
-        !== undefined
-    ){
+    if(event.webkitCompassHeading!== undefined){
         //iphone
         heading =
             event.webkitCompassHeading;
     }
-    else if(
-        event.alpha !== null
-    ){
+    else if(event.alpha !== null){
         //android
         heading =
             360 - event.alpha;
@@ -779,9 +771,8 @@ function handleOrientation(event){
     if(heading === null){
         return;
     }
-    map.setBearing(
-        360 - heading
-    );
+    map.setBearing(heading);
+        
     const arrow =
             document.getElementById("arrow");
     if(arrow){
