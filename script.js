@@ -794,6 +794,8 @@ function handleOrientation(event){
     `
     heading : ${heading.toFixed(1)}
     <br>
+    smooth:${smoothHeading.toFixed(1)}
+    <br>
     α : ${event.alpha?.toFixed(1)}
     <br>
     β : ${event.beta?.toFixed(1)}
@@ -813,13 +815,13 @@ function handleOrientation(event){
             if(delta > 180){
                     delta -= 360;
             }
-            if(delta < 180){
+            if(delta < -180){
                     delta += 360;
             }
             smoothHeading += delta * 0.15;
             smoothHeading = 
                     normalizeAngle(
-                            smoothHeadnig
+                            smoothHeading
                     );
     }
     const diff =
@@ -830,9 +832,6 @@ function handleOrientation(event){
     if(diff < 1){
         return;
     }
-    smoothHeading =
-        smoothHeading * 0.95 +
-        heading * 0.05;
     map.setBearing(
             - smoothHeading
     );
@@ -842,8 +841,7 @@ function handleOrientation(event){
         );
     if(arrow){
         arrow.style.transform =
-             `rotate(${-heading}deg)`;    
-        //"rotate(0deg)";
+             `rotate(${-smoothHeading}deg)`;    
     }
 }
 
