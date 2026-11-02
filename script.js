@@ -371,10 +371,19 @@ function startNavigation(goal) {
                     {
                             animate:false
                     });
+                    const point =
+                            map.project([myLat,myLng]);
+                    //現在地アイコンのy軸上の位置
+                    point.y += window.innerHeight*0.2;
+                    const offsetproject(point);
+                    map.panTo(
+                            offsetLanLng,{
+                                    animate:false
+                            }
+                    );
             }
             if(inCompassMode){
                     map.panTo([myLat,myLng]);
-                    //map.panTo([myLat,myLng],{animate:false});
             }
             if (selectedGoal) {
                 showRoute(
