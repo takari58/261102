@@ -769,6 +769,11 @@ function startCompass(){
 //地図回転
 let smoothHeading = 0;
 let firstHeading = true;
+
+function normalizeAngle(angle){
+        return(angle + 360) % 360;
+}
+
 function handleOrientation(event){
     let heading = null;
     if(event.webkitCompassHeading !== undefined)
@@ -799,9 +804,23 @@ function handleOrientation(event){
     `;
         
     if(firstHeading){
-        smoothHeading =
-            heading;
+        smoothHeading = heading;
         firstHeading = false;
+    }
+    else
+    {
+            let delta = heading - smoothHeading;
+            if(delta > 180){
+                    delta -= 360;
+            }
+            if(delta < 180){
+                    delta += 360;
+            }
+            smoothHeading += delta * 0.15;
+            smoothHeading = 
+                    normalizeAngle(
+                            smoothHeadnig
+                    );
     }
     const diff =
         Math.abs(
@@ -814,10 +833,9 @@ function handleOrientation(event){
     smoothHeading =
         smoothHeading * 0.95 +
         heading * 0.05;
-    /*map.setBearing(
-            0
-        //180 - smoothHeading
-    );*/
+    map.setBearing(
+            - smoothHeading
+    );
     const arrow =
         document.getElementById(
             "arrow"
