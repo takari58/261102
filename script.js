@@ -772,13 +772,13 @@ function handleOrientation(event){
         event.alpha !== null
     ){
         heading =
-            360 - event.alpha;
+            event.alpha;
     }
     if(heading === null){
         return;
     }
     map.setBearing(
-        360-heading
+        -heading
     );
     const arrow =
             document.getElementById("arrow");
