@@ -367,17 +367,25 @@ function startNavigation(goal) {
                 accuracy
             );
             if(inCompassMode){
-                    map.setView([mylat,mylng],map.getZoom(),
-                    {
-                            animate:false
-                    });
+                    map.setView(
+                            [mylat,mylng],
+                            map.getZoom(),
+                            {
+                                    animate:false
+                            }
+                    );
                     const point =
-                            map.project([myLat,myLng]);
+                            map.project(
+                                    [myLat,myLng]
+                            );
                     //現在地アイコンのy軸上の位置
-                    point.y += window.innerHeight*0.2;
-                    const offsetLatLng ＝map.unproject(point);
+                    point.y += 
+                            window.innerHeight*0.2;
+                    const offsetLatLng ＝
+                            map.unproject(point);
                     map.panTo(
-                            offsetLanLng,{
+                            offsetLanLng,
+                            {
                                     animate:false
                             }
                     );
