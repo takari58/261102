@@ -373,7 +373,7 @@ function startNavigation(goal) {
                     });
             }
             if(inCompassMode){
-                    map.panTo([myLat,myLng];
+                    map.panTo([myLat,myLng]);
                     //map.panTo([myLat,myLng],{animate:false});
             }
             if (selectedGoal) {
