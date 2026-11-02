@@ -771,20 +771,33 @@ let smoothHeading = 0;
 let firstHeading = true;
 function handleOrientation(event){
     let heading = null;
-    if(
-        event.webkitCompassHeading !== undefined
-    ){
+    if(event.webkitCompassHeading !== undefined)
+    {
         heading =
             event.webkitCompassHeading;
-    }else if(
-        event.alpha !== null
-    ){
+    }
+    else if(event.alpha !== null)
+    {
         heading =
             event.alpha;
     }
     if(heading === null){
         return;
     }
+
+    document.getElementById("info").innerHTML =
+    `
+    heading : ${heading.toFixed(1)}
+    <br>
+    α : ${event.alpha?.toFixed(1)}
+    <br>
+    β : ${event.beta?.toFixed(1)}
+    <br>
+    γ : ${event.gamma?.toFixed(1)}
+    <br>
+    absolute : ${event.absolute}
+    `;
+        
     if(firstHeading){
         smoothHeading =
             heading;
@@ -795,7 +808,7 @@ function handleOrientation(event){
             heading -
             smoothHeading
         );
-    if(diff < 3){
+    if(diff < 1){
         return;
     }
     smoothHeading =
