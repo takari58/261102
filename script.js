@@ -782,7 +782,8 @@ function handleOrientation(event){
         if(heading === null){
                 return;
         }        
-        
+
+        /*
         document.getElementById("info").innerHTML =
         `
         heading=${heading.toFixed(1)}
@@ -791,6 +792,7 @@ function handleOrientation(event){
         <br>
         absolute=${event.absolute}
         `;
+        */
         heading = (360 * event.alpha) % 360;
         map.setBearing(
                 -heading
