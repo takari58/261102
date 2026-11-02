@@ -766,7 +766,7 @@ function handleOrientation(event){
         else if(event.alpha !== null){
                 //android
                 heading =
-                    360 - event.alpha;
+                    event.alpha;
         }
         if(heading === null){
                 return;
