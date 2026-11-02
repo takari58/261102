@@ -368,7 +368,7 @@ function startNavigation(goal) {
             );
             if(inCompassMode){
                     map.setView(
-                            [mylat,mylng],
+                            [myLat,myLng],
                             map.getZoom(),
                             {
                                     animate:false
