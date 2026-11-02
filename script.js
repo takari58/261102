@@ -717,7 +717,7 @@ function toggleCompass(){
     inCompassMode =
         !inCompassMode;
     if(!inCompassMode){
-        map.setBearing(0);
+        map.setBearing(90);
         window.removeEventListener(
             "deviceorientation",
             handleOrientation,
