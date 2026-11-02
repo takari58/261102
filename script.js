@@ -784,7 +784,7 @@ function handleOrientation(event){
         `;
         heading = (360 * event.alpha) % 360;
         map.setBearing(
-                *heading
+                heading
         );
         
         const arrow =
