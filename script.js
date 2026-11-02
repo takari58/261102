@@ -774,13 +774,15 @@ function handleOrientation(event){
     console.log(
             "heading=",heading
     );
-    map.setBearing(180 - heading);
+    map.setBearing(
+            (heading + 180) % 360
+    );
         
     const arrow =
             document.getElementById("arrow");
     if(arrow){
             arrow.style.transform=
-                    "rotate(180deg)";
+                    "rotate(0deg)";
     }
 }
 
