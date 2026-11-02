@@ -384,7 +384,7 @@ function startNavigation(goal) {
                     const offsetLatLng =
                             map.unproject(point);
                     map.panTo(
-                            offsetLanLng,
+                            offsetLatLng,
                             {
                                     animate:false
                             }
