@@ -767,43 +767,52 @@ function startCompass(){
 }
 
 //地図回転
+let smoothHeading = 0;
+let firstHeading = true;
 function handleOrientation(event){
-        let heading = null;
-        if(event.webkitCompassHeading!== undefined){
-                //iphone
-                heading =
-                event.webkitCompassHeading;
-        }
-        else if(event.alpha !== null){
-                //android
-                heading =
-                    event.alpha;
-        }
-        if(heading === null){
-                return;
-        }        
-
-        /*
-        document.getElementById("info").innerHTML =
-        `
-        heading=${heading.toFixed(1)}
-        <br>
-        α=${event.alpha?.toFixed(1)}
-        <br>
-        absolute=${event.absolute}
-        `;
-        */
-        heading = (360 * event.alpha) % 360;
-        map.setBearing(
-                -heading
+    let heading = null;
+    if(
+        event.webkitCompassHeading !== undefined
+    ){
+        heading =
+            event.webkitCompassHeading;
+    }else if(
+        event.alpha !== null
+    ){
+        heading =
+            event.alpha;
+    }
+    if(heading === null){
+        return;
+    }
+    if(firstHeading){
+        smoothHeading =
+            heading;
+        firstHeading = false;
+    }
+    const diff =
+        Math.abs(
+            heading -
+            smoothHeading
         );
-        
-        const arrow =
-                document.getElementById("arrow");
-        if(arrow){
-                arrow.style.transform=
-                        "rotate(0deg)";
-        }
+    if(diff < 3){
+        return;
+    }
+    smoothHeading =
+        smoothHeading * 0.95 +
+        heading * 0.05;
+    map.setBearing(
+        -smoothHeading
+    );
+    const arrow =
+        document.getElementById(
+            "arrow"
+        );
+    if(arrow){
+        arrow.style.transform =
+            "rotate(0deg)";
+    }
 }
+
 
 
