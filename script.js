@@ -374,6 +374,7 @@ function startNavigation(goal) {
                                 animate:false
                             }
                     );
+                    /*
                     const point =
                             map.project(
                                     [myLat,myLng]
@@ -389,6 +390,7 @@ function startNavigation(goal) {
                                     animate:false
                             }
                     );
+                    */
             }
             if (selectedGoal) {
                 showRoute(
