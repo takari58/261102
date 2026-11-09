@@ -368,11 +368,11 @@ function startNavigation(goal) {
             );
             if(inCompassMode){
                 map.setView(
-                        [myLat,myLng],
-                        map.getZoom(),
-                        {
+                    [myLat,myLng],
+                    map.getZoom(),
+                    {
                         animate:true
-                        }
+                    }
                 );
                 /*
                 const point =
