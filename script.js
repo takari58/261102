@@ -479,13 +479,11 @@ async function showRoute(
             await fetch(url);
         const data =
             await response.json();
-
         // ルートが存在しない
         if (
             !data.routes ||
             data.routes.length === 0
         ) {
-
             document
                 .getElementById("info")
                 .innerHTML = `
@@ -499,15 +497,12 @@ async function showRoute(
                 `;
             return;
         }
-
         const route =
             data.routes[0];
-
         // 古いルートを削除
         if (routeLine) {
             map.removeLayer(routeLine);
         }
-
         // GeoJSON → Leaflet形式
         const latlngs =
             route.geometry.coordinates.map(
@@ -516,7 +511,6 @@ async function showRoute(
                     point[0]
                 ]
             );
-
         // 新しいルート
         routeLine = L.polyline(
             latlngs,
@@ -528,17 +522,14 @@ async function showRoute(
                 lineJoin: "round"
             }
         ).addTo(map);
-
         // 距離
         const distanceKm =
             (
                 route.distance / 1000
             ).toFixed(2);
-
         // メートル
         const distanceMeter =
             route.distance;
-
         // 徒歩時間 4km/h
         const walkMinutes =
             Math.max(
@@ -559,45 +550,41 @@ async function showRoute(
                 1,
                 Math.round(distanceMeter/500)
             );
-
         // 情報表示
         document
-            .getElementById("info")
-            .innerHTML = `
-                <div class="destination-name">
-                    ${goal.icon}
-                    ${goal.name}
-                </div>
-                <div class="destination-category">
-                    ${goal.category}
-                </div>
-                <div class="route-information">
-                    <div>🚶<strong> 約 ${walkMinutes} 分</strong></div>
-                    <div>🚴<strong> 約 ${bicycleMinutes} 分</strong></div>
-                    <div>🚙<strong>約 ${carMinutes} 分</strong></div>
-                    <div>📏<strong>${distanceKm} km</strong></div>
-                </div>
-                <div class="route-message">🧭 青い線に沿って進んでください</div>
-            `;
+        .getElementById("info")
+        .innerHTML = `
+            <div class="destination-name">
+                ${goal.icon}
+                ${goal.name}
+            </div>
+            <div class="destination-category">
+                ${goal.category}
+            </div>
+            <div class="route-information">
+                <div>🚶<strong> 約 ${walkMinutes} 分</strong></div>
+                <div>🚴<strong> 約 ${bicycleMinutes} 分</strong></div>
+                <div>🚙<strong>約 ${carMinutes} 分</strong></div>
+                <div>📏<strong>${distanceKm} km</strong></div>
+            </div>
+            <div class="route-message">🧭 青い線に沿って進んでください</div>
+        `;
     }
-
     catch (error) {
         console.error(error);
         document
-            .getElementById("info")
-            .innerHTML = `
-                <div class="route-error">
-                    ⚠️ ルート検索に失敗しました
-                </div>
-            `;
+        .getElementById("info")
+        .innerHTML = `
+            <div class="route-error">
+                ⚠️ ルート検索に失敗しました
+            </div>
+        `;
     }
 }
-
 const categoryButtons =
     document.querySelectorAll(
         ".category-btn"
     );
-
 categoryButtons.forEach(button => {
     button.addEventListener(
         "click",
@@ -776,7 +763,7 @@ function handleOrientation(event){
     if(heading === null){
         return;
     }
-
+/*
     document.getElementById("info").innerHTML =
     `
     heading : ${heading.toFixed(1)}
@@ -789,6 +776,7 @@ function handleOrientation(event){
     <br>
     absolute : ${event.absolute}
     `;
+*/
         
     if(firstHeading){
         smoothHeading = heading;
