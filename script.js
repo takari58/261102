@@ -388,7 +388,7 @@ function startNavigation(goal) {
                     map.panTo(
                             offsetLatLng,
                             {
-                                    animate:false
+                                    animate:true
                             }
                     );
                     */
