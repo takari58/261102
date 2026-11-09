@@ -784,7 +784,7 @@ function handleOrientation(event){
     else if(event.alpha !== null)
     {
         heading =
-            event.alpha;
+            (360 - event.alpha) % 360;
     }
     if(heading === null){
         return;
