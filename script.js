@@ -367,31 +367,31 @@ function startNavigation(goal) {
                 accuracy
             );
             if(inCompassMode){
-                    map.setView(
-                            [myLat,myLng],
-                            map.getZoom(),
-                            {
-                                animate:true
-                            }
-                    );
-                    /*
-                    const point =
-                            map.project(
-                                    [myLat,myLng]
-                            );
-                    //現在地アイコンのy軸上の位置
-                    point.y += 
-                            window.innerHeight*0.4;
-                    const offsetLatLng =
-                            map.unproject(point);
-                    //アニメーションなしに現在地アイコンを中心に表示させる
-                    map.panTo(
-                            offsetLatLng,
-                            {
-                                    animate:false
-                            }
-                    );
-                    */
+                map.setView(
+                        [myLat,myLng],
+                        map.getZoom(),
+                        {
+                        animate:true
+                        }
+                );
+                /*
+                const point =
+                        map.project(
+                                [myLat,myLng]
+                        );
+                //現在地アイコンのy軸上の位置
+                point.y += 
+                        window.innerHeight*0.4;
+                const offsetLatLng =
+                        map.unproject(point);
+                //アニメーションなしに現在地アイコンを中心に表示させる
+                map.panTo(
+                        offsetLatLng,
+                        {
+                                animate:false
+                        }
+                );
+                */
             }
             if (selectedGoal) {
                 showRoute(
