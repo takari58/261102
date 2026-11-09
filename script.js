@@ -371,7 +371,7 @@ function startNavigation(goal) {
                             [myLat,myLng],
                             map.getZoom(),
                             {
-                                    animate:false
+                                animate:false
                             }
                     );
                     const point =
@@ -652,56 +652,40 @@ document
 .addEventListener(
     "click",
     function() {
-            // 現在地がすでに取得できている
-            if (currentPosition) {
-                    map.setView(
-                    [
-                        currentPosition.lat,
-                        currentPosition.lng
-                    ],
-                    17
-                );
-                return;
-            }
-            // GPSが使えない
-            if (!navigator.geolocation) {
-                    alert(
-                    "位置情報を利用できません。"
-                );
-                return;
-            }
-            // 現在地取得
-            navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                            const lat =
-                                position.coords.latitude;
-                            const lng =
-                                position.coords.longitude;
-                            currentPosition = {
-                                lat: lat,
-                                lng: lng
-                            };
-                            updateCurrentMarker(
-                                lat,
-                                lng,
-                                position.coords.accuracy
-                            );
-                            map.setView(
-                                [lat, lng],
-                                17
-                            );
-                    },
+        // 現在地がすでに取得できている
+        if (currentPosition) {
+            map.setView([currentPosition.lat,currentPosition.lng],17);
+            return;
+        }
+        // GPSが使えない
+        if (!navigator.geolocation) {
+            alert(
+                "位置情報を利用できません。"
+            );
+            return;
+        }
+        // 現在地取得
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                const lat =
+                    position.coords.latitude;
+                const lng =
+                    position.coords.longitude;
+                currentPosition = {lat: lat,lng: lng};
+                updateCurrentMarker(lat,lng,position.coords.accuracy);
+                map.setView([lat, lng],17);
+            },
                     
-                    function(error) {
-                            console.error(error);
-                            alert(
-                                "現在地を取得できませんでした。"
-                            );
-                    },
-                {
-                    enableHighAccuracy: true,
-                    timeout: 10000,
-                    maximumAge: 0
+            function(error) {
+                console.error(error);
+                alert(
+                    "現在地を取得できませんでした。"
+                );
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
             }
         );
     }
