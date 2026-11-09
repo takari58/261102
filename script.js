@@ -841,7 +841,7 @@ function handleOrientation(event){
         );
     if(arrow){
         arrow.style.transform =
-             `rotate(${-smoothHeading}deg)`;    
+             `rotate(0deg)`;    
     }
 }
 
