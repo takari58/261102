@@ -816,7 +816,7 @@ function handleOrientation(event){
         return;
     }
     map.setBearing(
-            smoothHeading
+            -smoothHeading
     );
     const arrow =
         document.getElementById(
