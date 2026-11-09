@@ -371,7 +371,7 @@ function startNavigation(goal) {
                             [myLat,myLng],
                             map.getZoom(),
                             {
-                                animate:false
+                                animate:true
                             }
                     );
                     /*
