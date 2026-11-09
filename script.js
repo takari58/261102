@@ -781,11 +781,9 @@ function handleOrientation(event){
     <br>
     smooth:${smoothHeading.toFixed(1)}
     <br>
+    bearing:${map.getBearing()}
+    <br>
     α : ${event.alpha?.toFixed(1)}
-    <br>
-    β : ${event.beta?.toFixed(1)}
-    <br>
-    γ : ${event.gamma?.toFixed(1)}
     <br>
     absolute : ${event.absolute}
     `;
@@ -818,7 +816,7 @@ function handleOrientation(event){
         return;
     }
     map.setBearing(
-            - smoothHeading
+            smoothHeading
     );
     const arrow =
         document.getElementById(
