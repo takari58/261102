@@ -702,6 +702,7 @@ function toggleCompass(){
     inCompassMode =
         !inCompassMode;
     if(!inCompassMode){
+        map.dragging.enable();
         map.setBearing(0);
         window.removeEventListener(
             "deviceorientation",
@@ -727,6 +728,7 @@ function toggleCompass(){
         });
     }else{
         startCompass();
+        map.dragging.disable();
     }
 }
 
