@@ -384,6 +384,7 @@ function startNavigation(goal) {
                             window.innerHeight*0.4;
                     const offsetLatLng =
                             map.unproject(point);
+                    //アニメーションなしに現在地アイコンを中心に表示させる
                     map.panTo(
                             offsetLatLng,
                             {
