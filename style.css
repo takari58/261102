@@ -384,6 +384,7 @@ header h1 {
                 100vh - 184px
             );
     }
+    /*
     #locationButton {
         right: 12px;
         bottom: 75px;
@@ -391,6 +392,7 @@ header h1 {
         height: 48px;
         line-height: 48px;
     }
+    */
     #legend {
         left: 10px;
         bottom: 75px;
