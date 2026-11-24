@@ -2,16 +2,16 @@ console.log("leaflet=",L);
 console.log("Bearing =",L.Map.prototype.setBearing);
 
 const map = L.map("map",{
-        maxZoom:18,
-        minZoom:5,
-        rotate:true,
-        touchRotate:true,
-        bearing:0
+    maxZoom:18,
+    minZoom:5,
+    rotate:true,
+    touchRotate:true,
+    bearing:0
 });
 console.log(map);
 map.touchRotate.enable();
 map.on("zoomend rotate",() => {
-        map.invalidateSize();
+    map.invalidateSize();
 });
 
 console.log("touchRotate =",map.touchRotate);
@@ -22,22 +22,70 @@ navigator.geolocation.getCurrentPosition(
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
         map.setView([lat, lng], 18);
-        updateCurrentMarker(
-            lat,
-            lng,
-            position.coords.accuracy
-        );
+        updateCurrentMarker(lat,lng,position.coords.accuracy);
     }
 );
 
-L.tileLayer(
-    "https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg",
-    {
-        attribution:
-            '<a href="https://maps.gsi.go.jp/development/ichiran.html">国土地理院</a>',
-        maxZoom: 18
+//openstreetmap
+const osmLayer =
+    L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+            attribution:
+            "© OpenStreetMap contributors",
+            maxZoom:19
+        }
+    );
+//航空写真
+const photoLayer =
+    L.tileLayer(
+        "https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg",
+        {
+            attribution:"国土地理院",
+            maxZoom:18
+        }
+    );
+
+photoLayer.addTo(map);
+
+let isPhotoMode = true;
+document
+.getElementById("layerButton")
+.addEventListener(
+    "click",
+    function(){
+
+        if(isPhotoMode){
+
+            map.removeLayer(photoLayer);
+            osmLayer.addTo(map);
+
+            this.textContent = "🗺️";
+
+        }else{
+
+            map.removeLayer(osmLayer);
+            photoLayer.addTo(map);
+
+            this.textContent = "🛰️";
+
+        }
+
+        isPhotoMode = !isPhotoMode;
+
+        // ルート再描画
+        if(
+            selectedGoal &&
+            currentPosition
+        ){
+            showRoute(
+                currentPosition.lat,
+                currentPosition.lng,
+                selectedGoal
+            );
+        }
     }
-).addTo(map);
+);
 
 const goals = [
     //カテゴリー：観光、グルメ、交通、公共施設
@@ -368,31 +416,31 @@ function startNavigation(goal) {
                 accuracy
             );
             if(inCompassMode){
-                map.setView(
-                    [myLat,myLng],
-                    map.getZoom(),
-                    {
-                        animate:true
-                    }
-                );
-                /*
-                const point =
-                        map.project(
-                                [myLat,myLng]
-                        );
-                //現在地アイコンのy軸上の位置
-                point.y += 
-                        window.innerHeight*0.4;
-                const offsetLatLng =
-                        map.unproject(point);
-                //アニメーションなしに現在地アイコンを中心に表示させる
-                map.panTo(
-                        offsetLatLng,
-                        {
+                    map.setView(
+                            [myLat,myLng],
+                            map.getZoom(),
+                            {
                                 animate:false
-                        }
-                );
-                */
+                            }
+                    );
+                    /*
+                    const point =
+                            map.project(
+                                    [myLat,myLng]
+                            );
+                    //現在地アイコンのy軸上の位置
+                    point.y += 
+                            window.innerHeight*0.4;
+                    const offsetLatLng =
+                            map.unproject(point);
+                    //アニメーションなしに現在地アイコンを中心に表示させる
+                    map.panTo(
+                            offsetLatLng,
+                            {
+                                    animate:false
+                            }
+                    );
+                    */
             }
             if (selectedGoal) {
                 showRoute(
@@ -516,15 +564,20 @@ async function showRoute(
                 ]
             );
         // 新しいルート
+        const routeColor =
+        isPhotoMode
+        ? "#ff3333"
+        : "#1976d2";
+
         routeLine = L.polyline(
-            latlngs,
-            {
-                color: "#1976d2",
-                weight: 7,
-                opacity: 0.85,
-                lineCap: "round",
-                lineJoin: "round"
-            }
+        latlngs,
+        {
+            color:routeColor,
+            weight:7,
+            opacity:0.85,
+            lineCap:"round",
+            lineJoin:"round"
+        }
         ).addTo(map);
         // 距離
         const distanceKm =
@@ -726,10 +779,7 @@ function toggleCompass(){
 //コンパス処理
 function startCompass(){
 
-    if(
-        "ondeviceorientationabsolute"
-        in window
-    ){
+    if("ondeviceorientationabsolute"in window){
         window.addEventListener(
             "deviceorientationabsolute",
             handleOrientation,
@@ -749,7 +799,7 @@ let smoothHeading = 0;
 let firstHeading = true;
 
 function normalizeAngle(angle){
-        return(angle + 360) % 360;
+    return(angle + 360) % 360;
 }
 
 function handleOrientation(event){
@@ -788,18 +838,18 @@ function handleOrientation(event){
     }
     else
     {
-            let delta = heading - smoothHeading;
-            if(delta > 180){
-                    delta -= 360;
-            }
-            if(delta < -180){
-                    delta += 360;
-            }
-            smoothHeading += delta * 0.15;
-            smoothHeading = 
-                    normalizeAngle(
-                            smoothHeading
-                    );
+        let delta = heading - smoothHeading;
+        if(delta > 180){
+            delta -= 360;
+        }
+        if(delta < -180){
+            delta += 360;
+        }
+        smoothHeading += delta * 0.15;
+        smoothHeading = 
+            normalizeAngle(
+                smoothHeading
+            );
     }
     const diff =
         Math.abs(
@@ -810,7 +860,7 @@ function handleOrientation(event){
         return;
     }
     map.setBearing(
-            -smoothHeading
+        -smoothHeading
     );
     const arrow =
         document.getElementById(
