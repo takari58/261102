@@ -2,7 +2,7 @@ console.log("leaflet=",L);
 console.log("Bearing =",L.Map.prototype.setBearing);
 
 const map = L.map("map",{
-        maxZoom:19,
+        maxZoom:18,
         minZoom:5,
         rotate:true,
         touchRotate:true,
@@ -31,10 +31,11 @@ navigator.geolocation.getCurrentPosition(
 );
 
 L.tileLayer(
-    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg",
     {
-        attribution: "© OpenStreetMap contributors",
-        maxZoom:19
+        attribution:
+            '<a href="https://maps.gsi.go.jp/development/ichiran.html">国土地理院</a>',
+        maxZoom: 18
     }
 ).addTo(map);
 
