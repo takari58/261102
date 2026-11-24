@@ -60,14 +60,14 @@ document
             map.removeLayer(photoLayer);
             osmLayer.addTo(map);
 
-            this.textContent = "🗺️";
+            this.textContent = "🛰️";
 
         }else{
 
             map.removeLayer(osmLayer);
             photoLayer.addTo(map);
 
-            this.textContent = "🛰️";
+            this.textContent = "🗺️";
 
         }
 
